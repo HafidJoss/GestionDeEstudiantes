@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Dashboard } from './components/Dashboard';
 import { Register } from './components/Register';
 import { Login } from './components/Login';
+import { EditProfile } from './components/EditProfile';
+import { TeacherDashboard } from './components/TeacherDashboard';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

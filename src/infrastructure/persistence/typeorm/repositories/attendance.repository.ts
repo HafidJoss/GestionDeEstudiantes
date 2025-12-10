@@ -26,6 +26,13 @@ export class AttendanceRepository implements IAttendanceRepository {
         });
     }
 
+    async findAllByStudentId(studentId: string): Promise<Attendance[]> {
+        return await this.typeOrmRepository.find({
+            where: { student_id: studentId },
+            order: { date: 'DESC' },
+        });
+    }
+
     async save(attendance: Partial<Attendance>): Promise<Attendance> {
         return await this.typeOrmRepository.save(attendance);
     }

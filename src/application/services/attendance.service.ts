@@ -52,4 +52,7 @@ export class AttendanceService {
             currentStreak: newStreak
         };
     }
+    async getStudentAttendance(studentId: string) {
+        return await this.attendanceRepository.findAllByStudentId(studentId);
+    }
 }

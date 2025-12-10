@@ -8,6 +8,7 @@ import { Student } from './infrastructure/persistence/typeorm/entities/student.e
 import { Attendance } from './infrastructure/persistence/typeorm/entities/attendance.entity';
 import { Task } from './infrastructure/persistence/typeorm/entities/task.entity';
 import { Submission } from './infrastructure/persistence/typeorm/entities/submission.entity';
+import { Classroom } from './infrastructure/persistence/typeorm/entities/classroom.entity';
 import { AttendanceController } from './presentation/controllers/attendance.controller';
 import { TaskController } from './presentation/controllers/task.controller';
 import { StudentController } from './presentation/controllers/student.controller';
@@ -17,6 +18,9 @@ import { StudentService } from './application/services/student.service';
 import { StreakService } from './application/services/streak.service';
 import { StudentRepository } from './infrastructure/persistence/typeorm/repositories/student.repository';
 import { AttendanceRepository } from './infrastructure/persistence/typeorm/repositories/attendance.repository';
+import { ClassroomRepository } from './infrastructure/persistence/typeorm/repositories/classroom.repository';
+import { ClassroomService } from './application/services/classroom.service';
+import { ClassroomController } from './presentation/controllers/classroom.controller';
 
 @Module({
   imports: [
@@ -29,9 +33,9 @@ import { AttendanceRepository } from './infrastructure/persistence/typeorm/repos
       migrations: [],
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Student, Attendance, Task, Submission]),
+    TypeOrmModule.forFeature([Student, Attendance, Task, Submission, Classroom]),
   ],
-  controllers: [AppController, AttendanceController, TaskController, StudentController],
+  controllers: [AppController, AttendanceController, TaskController, StudentController, ClassroomController],
   providers: [
     AppService,
     AttendanceService,
@@ -46,6 +50,11 @@ import { AttendanceRepository } from './infrastructure/persistence/typeorm/repos
       provide: 'IAttendanceRepository',
       useClass: AttendanceRepository,
     },
+    {
+      provide: 'IClassroomRepository',
+      useClass: ClassroomRepository,
+    },
+    ClassroomService,
   ],
 })
 export class AppModule { }

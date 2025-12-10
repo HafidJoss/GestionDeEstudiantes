@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
 import { Submission } from './submission.entity';
+import { Classroom } from './classroom.entity';
 
 @Entity('tasks')
 export class Task {
@@ -17,4 +18,7 @@ export class Task {
 
     @OneToMany(() => Submission, (submission) => submission.task)
     submissions: Submission[];
+
+    @ManyToOne(() => Classroom, (classroom) => classroom.tasks)
+    classroom: Classroom;
 }

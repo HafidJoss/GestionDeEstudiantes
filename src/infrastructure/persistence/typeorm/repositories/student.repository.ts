@@ -15,11 +15,19 @@ export class StudentRepository implements IStudentRepository {
         return await this.typeOrmRepository.findOne({ where: { id } });
     }
 
+    async findByEmail(email: string): Promise<Student | null> {
+        return await this.typeOrmRepository.findOne({ where: { email } });
+    }
+
     create(data: Partial<Student>): Student {
         return this.typeOrmRepository.create(data);
     }
 
     async save(student: Student): Promise<Student> {
         return await this.typeOrmRepository.save(student);
+    }
+
+    async findAll(): Promise<Student[]> {
+        return await this.typeOrmRepository.find();
     }
 }
