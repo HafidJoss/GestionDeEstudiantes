@@ -12,6 +12,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'student_management',
   synchronize: false,
   logging: true,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
   entities: ['src/infrastructure/persistence/typeorm/entities/**/*.entity.ts'],
   migrations: ['src/infrastructure/persistence/typeorm/migrations/**/*.ts'],
   subscribers: [],

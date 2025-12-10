@@ -7,25 +7,22 @@ Aplicación web moderna para la gestión de estudiantes, asistencias y tareas, c
 ### Backend
 *   **Framework**: [NestJS](https://nestjs.com/) (Node.js)
 *   **Lenguaje**: TypeScript
-*   **Base de Datos**: PostgreSQL
+*   **Base de Datos**: PostgreSQL (a través de **Supabase**)
 *   **ORM**: TypeORM
 *   **Arquitectura**: Clean Architecture (Domain, Application, Infrastructure, Presentation)
 
 ### Frontend
 *   **Librería**: React
 *   **Empaquetador**: Vite
-*   **Estilos**: CSS Minimalista (Tema Verde Pastel)
+*   **Estilos**: CSS Minimalista (Tema Verde Pastel) y [Lucide React](https://lucide.dev/)
 *   **Router**: React Router Dom
-
-### DevOps
-*   **Contenedores**: Docker & Docker Compose
 
 ---
 
 ## 📋 Requisitos Previos
 
 *   [Node.js](https://nodejs.org/) (v18 o superior)
-*   [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+*   Cuenta y proyecto activo en [Supabase](https://supabase.com/)
 
 ---
 
@@ -37,19 +34,26 @@ git clone <URL_DEL_REPOSITORIO>
 cd sistema-gestion-estudiantes
 ```
 
-### 2. Configurar el Backend y Base de Datos
+### 2. Configurar el Backend
 
 Instala las dependencias del backend:
 ```bash
 npm install
 ```
 
-Levanta la base de datos PostgreSQL con Docker:
-```bash
-docker-compose up -d
+#### Variables de Entorno
+Crea un archivo `.env` en la raíz del proyecto con tus credenciales de Supabase:
+
+```env
+DB_HOST=db.tudominio.supabase.co
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=tu_password
+DB_NAME=postgres
+DB_SSL=true
 ```
 
-Ejecuta las migraciones para crear las tablas:
+Ejecuta las migraciones para crear las tablas en Supabase:
 ```bash
 npm run migration:run
 ```
@@ -107,11 +111,9 @@ El proyecto sigue los principios de **Clean Architecture** para garantizar mante
 | Comando | Descripción |
 | :--- | :--- |
 | `npm run start:dev` | Inicia el servidor NestJS en modo desarrollo. |
-| `npm run migration:run` | Ejecuta las migraciones pendientes en la DB. |
+| `npm run migration:run` | Ejecuta las migraciones pendientes en Supabase. |
 | `npm run migration:generate -- <path>` | Genera una nueva migración basada en cambios de entidades. |
 | `npm run seed` | Ejecuta el script de semilla para datos iniciales. |
-| `docker-compose up -d` | Inicia el contenedor de PostgreSQL. |
-| `docker-compose down -v` | Detiene y elimina contenedores y volúmenes (Reiniciar DB). |
 
 ---
 
